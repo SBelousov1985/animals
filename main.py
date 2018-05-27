@@ -163,3 +163,7 @@ class Goose(Birds):
 
     def voice(self):
         return "honk"
+
+
+g1 = Goose()
+print(g1)
