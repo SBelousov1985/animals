@@ -33,7 +33,7 @@ class Animals:
             self.hunger = 0
 
     def voice(self):
-        return ""
+        raise NotImplementedError('Определите voice в классе %s.' % self.__class__.__name__)
 
     def live(self, hours, weight_pt=0):
         self.age_hours += hours
@@ -44,14 +44,20 @@ class Animals:
 
 
 class Ungulates(Animals):
-    artiodactyls = False
+    _artiodactyls = False
+
+    def is_artiodactyls(self):
+        return self._artiodactyls
 
     def get_random_weight(self):
         return random.randint(1000, 350000) / 100
 
+    def voice(self):
+        return super().voice()
+
 
 class Cow(Ungulates):
-    artiodactyls = True
+    _artiodactyls = True
 
     def __add__(self, other):
         if self.sex + other.sex == 1:
@@ -65,7 +71,7 @@ class Cow(Ungulates):
 
 
 class Goat(Ungulates):
-    artiodactyls = True
+    _artiodactyls = True
 
     def __add__(self, other):
         if self.sex + other.sex == 1:
@@ -79,7 +85,7 @@ class Goat(Ungulates):
 
 
 class Sheep(Ungulates):
-    artiodactyls = True
+    _artiodactyls = True
 
     def __add__(self, other):
         if self.sex + other.sex == 1:
@@ -93,7 +99,7 @@ class Sheep(Ungulates):
 
 
 class Pigs(Ungulates):
-    artiodactyls = True
+    _artiodactyls = True
 
     def __add__(self, other):
         if self.sex + other.sex == 1:
@@ -110,15 +116,21 @@ class Pigs(Ungulates):
 
 
 class Birds(Animals):
-    waterfowl = False
+    _waterfowl = False
     able_to_fly = True
+
+    def iswaterfowl(self):
+        return self._waterfowl
 
     def get_random_weight(self):
         return random.randint(0.1, 15000) / 100
 
+    def voice(self):
+        return super().voice()
+
 
 class Duck(Birds):
-    waterfowl = True
+    _waterfowl = True
 
     def __add__(self, other):
         if self.sex + other.sex == 1:
@@ -152,7 +164,7 @@ class Chicken(Birds):
 
 
 class Goose(Birds):
-    waterfowl = True
+    _waterfowl = True
 
     def __add__(self, other):
         if self.sex + other.sex == 1:
@@ -165,5 +177,12 @@ class Goose(Birds):
         return "honk"
 
 
-g1 = Goose()
-print(g1)
+cow1 = Cow()
+cow2 = Cow(3)
+
+pig1 = Pigs(4, 3, True)
+pig2 = Pigs(3, 5, False)
+pig3 = pig1 + pig2
+
+duck1 = Duck()
+duck2 = Duck()
