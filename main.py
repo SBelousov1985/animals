@@ -119,7 +119,7 @@ class Birds(Animals):
     _waterfowl = False
     able_to_fly = True
 
-    def iswaterfowl(self):
+    def is_waterfowl(self):
         return self._waterfowl
 
     def get_random_weight(self):
